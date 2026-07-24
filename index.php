@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <div>
-                <img src="https://images.unsplash.com/photo-1505664177941-6d2524a80695?auto=format&fit=crop&q=80" alt="Law Office" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow-lg);">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80" alt="Law Office" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow-lg);">
             </div>
         </div>
     </div>

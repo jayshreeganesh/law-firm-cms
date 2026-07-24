@@ -4,7 +4,8 @@ require_once '../includes/db.php';
 // Check if user is logged in (unless on login page)
 $current_page = basename($_SERVER['PHP_SELF']);
 if ($current_page !== 'login.php' && !isset($_SESSION['admin_logged_in'])) {
-    header("Location: login.php");
+    $base_url = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    header("Location: $base_url/login.php");
     exit;
 }
 ?>
