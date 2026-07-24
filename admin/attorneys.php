@@ -134,7 +134,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
             
             <div style="margin-bottom: 1.5rem;">
                 <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Biography *</label>
-                <textarea name="bio" rows="6" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars($item['bio']) ?></textarea>
+                <textarea name="bio" class="rich-text" rows="6" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars($item['bio']) ?></textarea>
             </div>
             
             <div>

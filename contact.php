@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once 'includes/db.php';
 
 $success = false;
@@ -10,8 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = trim($_POST['phone'] ?? '');
     $subject = trim($_POST['subject'] ?? '');
     $message = trim($_POST['message'] ?? '');
+    $captcha = trim($_POST['captcha'] ?? '');
 
-    if ($name && $email && $message) {
+    if ($captcha != $_SESSION['captcha_answer']) {
+        $error = 'Incorrect security question answer. Please try again.';
+    } elseif ($name && $email && $message) {
         $stmt = $pdo->prepare("INSERT INTO messages (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)");
         if ($stmt->execute([$name, $email, $phone, $subject, $message])) {
             $success = true;
@@ -22,6 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Please fill out all required fields.';
     }
 }
+
+// Generate new captcha
+$num1 = rand(1, 9);
+$num2 = rand(1, 9);
+$_SESSION['captcha_answer'] = $num1 + $num2;
+
 require_once 'includes/header.php'; 
 ?>
 
@@ -72,6 +82,10 @@ require_once 'includes/header.php';
                     <div class="form-group">
                         <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message *</label>
                         <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="captcha" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Security Question: What is <?= $num1 ?> + <?= $num2 ?>? *</label>
+                        <input type="text" id="captcha" name="captcha" class="form-control" required style="width: 100px;">
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                 </form>

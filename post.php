@@ -11,6 +11,9 @@ if (!$post) {
     exit;
 }
 
+$page_title = $post['title'];
+$seo_description = $post['meta_description'] ?? '';
+
 require_once 'includes/header.php'; 
 ?>
 

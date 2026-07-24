@@ -53,16 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    $meta_desc = trim($_POST['meta_description'] ?? '');
+
     if ($title && $content && !$error) {
         if (isset($_POST['id']) && !empty($_POST['id'])) {
             $id = (int)$_POST['id'];
-            $stmt = $pdo->prepare("UPDATE posts SET title = ?, content = ?, image = ? WHERE id = ?");
-            $stmt->execute([$title, $content, $imagePath, $id]);
+            $stmt = $pdo->prepare("UPDATE posts SET title = ?, content = ?, image = ?, meta_description = ? WHERE id = ?");
+            $stmt->execute([$title, $content, $imagePath, $meta_desc, $id]);
             $success = "Post updated successfully.";
             $action = 'list';
         } else {
-            $stmt = $pdo->prepare("INSERT INTO posts (title, content, image) VALUES (?, ?, ?)");
-            $stmt->execute([$title, $content, $imagePath]);
+            $stmt = $pdo->prepare("INSERT INTO posts (title, content, image, meta_description) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$title, $content, $imagePath, $meta_desc]);
             $success = "Post created successfully.";
             $action = 'list';
         }
@@ -78,7 +80,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
 
 <?php if ($action === 'add' || $action === 'edit'): ?>
     <?php
-    $item = ['id' => '', 'title' => '', 'content' => '', 'image' => ''];
+    $item = ['id' => '', 'title' => '', 'content' => '', 'image' => '', 'meta_description' => ''];
     if ($action === 'edit' && isset($_GET['id'])) {
         $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
         $stmt->execute([(int)$_GET['id']]);
@@ -116,9 +118,15 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                 <input type="file" name="image" accept="image/*" style="width: 100%; padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
             </div>
             
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">SEO Meta Description</label>
+                <textarea name="meta_description" rows="2" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars($item['meta_description']) ?></textarea>
+                <small style="color: #64748b;">Brief description for search engines (max 160 characters).</small>
+            </div>
+            
             <div style="margin-bottom: 1.5rem;">
                 <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Content *</label>
-                <textarea name="content" rows="10" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars($item['content']) ?></textarea>
+                <textarea name="content" class="rich-text" rows="10" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars($item['content']) ?></textarea>
             </div>
             
             <div>

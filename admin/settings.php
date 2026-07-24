@@ -8,7 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'site_name' => $_POST['site_name'] ?? '',
         'site_email' => $_POST['site_email'] ?? '',
         'site_phone' => $_POST['site_phone'] ?? '',
-        'site_address' => $_POST['site_address'] ?? ''
+        'site_address' => $_POST['site_address'] ?? '',
+        'seo_description' => $_POST['seo_description'] ?? '',
+        'seo_keywords' => $_POST['seo_keywords'] ?? ''
     ];
     
     foreach ($settings as $key => $value) {
@@ -47,6 +49,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div style="margin-bottom: 1.5rem;">
             <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Office Address</label>
             <textarea name="site_address" rows="3" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars(get_setting($pdo, 'site_address')) ?></textarea>
+        </div>
+        
+        <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--admin-primary); border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">SEO Settings</h4>
+        
+        <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Global Meta Description</label>
+            <textarea name="seo_description" rows="2" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit; resize: vertical;"><?= htmlspecialchars(get_setting($pdo, 'seo_description')) ?></textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Global Meta Keywords</label>
+            <input type="text" name="seo_keywords" value="<?= htmlspecialchars(get_setting($pdo, 'seo_keywords')) ?>" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
         </div>
         
         <button type="submit" style="padding: 0.75rem 1.5rem; background-color: var(--admin-accent); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">Save Settings</button>

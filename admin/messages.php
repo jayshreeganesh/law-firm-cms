@@ -29,7 +29,15 @@ if (isset($_GET['toggle_read'])) {
     exit;
 }
 
-$stmt = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC");
+$page = max(1, (int)($_GET['page'] ?? 1));
+$limit = 10;
+$offset = ($page - 1) * $limit;
+
+$total = $pdo->query("SELECT COUNT(*) FROM messages")->fetchColumn();
+$totalPages = ceil($total / $limit);
+
+$stmt = $pdo->prepare("SELECT * FROM messages ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
+$stmt->execute();
 $messages = $stmt->fetchAll();
 ?>
 
@@ -75,5 +83,13 @@ $messages = $stmt->fetchAll();
         </table>
     </div>
 </div>
+
+<?php if ($totalPages > 1): ?>
+<div style="display: flex; justify-content: center; margin-bottom: 2rem; gap: 0.5rem;">
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <a href="messages.php?page=<?= $i ?>" style="padding: 0.5rem 1rem; border-radius: 4px; background-color: <?= $i === $page ? 'var(--admin-accent)' : 'white' ?>; color: <?= $i === $page ? 'white' : 'var(--admin-text)' ?>; font-weight: 500; text-decoration: none; border: 1px solid #cbd5e1;"><?= $i ?></a>
+    <?php endfor; ?>
+</div>
+<?php endif; ?>
 
 <?php require_once 'includes/admin_footer.php'; ?>

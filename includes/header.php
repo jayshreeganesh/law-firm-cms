@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars(get_setting($pdo, 'site_name')) ?> | Law Firm</title>
+    <?php
+        $final_desc = isset($seo_description) && $seo_description ? $seo_description : get_setting($pdo, 'seo_description');
+        $final_keywords = isset($seo_keywords) && $seo_keywords ? $seo_keywords : get_setting($pdo, 'seo_keywords');
+    ?>
+    <meta name="description" content="<?= htmlspecialchars($final_desc) ?>">
+    <meta name="keywords" content="<?= htmlspecialchars($final_keywords) ?>">
+    <title><?= isset($page_title) ? htmlspecialchars($page_title) . ' | ' : '' ?><?= htmlspecialchars(get_setting($pdo, 'site_name')) ?></title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
