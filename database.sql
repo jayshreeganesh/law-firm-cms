@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 
 -- Insert default admin user (password is 'admin123' hashed with bcrypt)
-INSERT INTO users (username, password, email) VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@lawyer-cms.local') ON DUPLICATE KEY UPDATE username=username;
+INSERT INTO users (username, password, email) VALUES ('admin', '$2y$10$C.Qh.0L3M/0jF3WnU/4oEe3MvO7C9e1vPjG61K2B1Pz8BqH3JjG7m', 'admin@lawyer-cms.local') ON DUPLICATE KEY UPDATE username=username;
 
 -- Insert default settings
 INSERT INTO settings (setting_key, setting_value) VALUES 
