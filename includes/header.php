@@ -23,8 +23,10 @@
         </a>
         <ul class="nav-links">
             <li><a href="index.php">Home</a></li>
+            <li><a href="about.php">About Us</a></li>
             <li><a href="practice-areas.php">Practice Areas</a></li>
             <li><a href="attorneys.php">Attorneys</a></li>
+            <li><a href="blog.php">News</a></li>
             <li><a href="contact.php">Contact</a></li>
         </ul>
         <a href="contact.php" class="btn btn-primary">Free Consultation</a>

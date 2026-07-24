@@ -20,26 +20,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $position = trim($_POST['position'] ?? '');
     $bio = trim($_POST['bio'] ?? '');
-    $image = trim($_POST['image'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
 
-    if ($name && $position && $bio) {
+    $imagePath = $_POST['current_image'] ?? '';
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = '../assets/uploads/attorneys/';
+        $fileName = time() . '_' . basename($_FILES['image']['name']);
+        $targetFile = $uploadDir . $fileName;
+        
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'webp'];
+        
+        if (in_array($imageFileType, $allowedTypes)) {
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+                $imagePath = 'assets/uploads/attorneys/' . $fileName;
+                if (!empty($_POST['current_image']) && file_exists('../' . $_POST['current_image'])) {
+                    unlink('../' . $_POST['current_image']);
+                }
+            } else {
+                $error = "Failed to upload image.";
+            }
+        } else {
+            $error = "Only JPG, PNG, and WebP files allowed.";
+        }
+    }
+
+    if ($name && $position && $bio && !$error) {
         if (isset($_POST['id']) && !empty($_POST['id'])) {
             // Update
             $id = (int)$_POST['id'];
             $stmt = $pdo->prepare("UPDATE attorneys SET name = ?, position = ?, bio = ?, image = ?, email = ?, phone = ? WHERE id = ?");
-            $stmt->execute([$name, $position, $bio, $image, $email, $phone, $id]);
+            $stmt->execute([$name, $position, $bio, $imagePath, $email, $phone, $id]);
             $success = "Attorney profile updated successfully.";
             $action = 'list';
         } else {
             // Insert
             $stmt = $pdo->prepare("INSERT INTO attorneys (name, position, bio, image, email, phone) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $position, $bio, $image, $email, $phone]);
+            $stmt->execute([$name, $position, $bio, $imagePath, $email, $phone]);
             $success = "Attorney added successfully.";
             $action = 'list';
         }
-    } else {
+    } elseif (!$error) {
         $error = "Name, Position, and Bio are required fields.";
     }
 }
@@ -70,10 +92,11 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="attorneys.php?action=<?= $action ?>">
+        <form method="POST" action="attorneys.php?action=<?= $action ?>" enctype="multipart/form-data">
             <?php if ($item['id']): ?>
                 <input type="hidden" name="id" value="<?= $item['id'] ?>">
             <?php endif; ?>
+            <input type="hidden" name="current_image" value="<?= htmlspecialchars($item['image']) ?>">
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div style="margin-bottom: 1rem;">
@@ -100,9 +123,13 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
             </div>
             
             <div style="margin-bottom: 1rem;">
-                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Image URL</label>
-                <input type="text" name="image" value="<?= htmlspecialchars($item['image']) ?>" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
-                <small style="color: #64748b;">Provide a full URL to the image (e.g., https://example.com/image.jpg)</small>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Profile Photo</label>
+                <?php if ($item['image']): ?>
+                    <div style="margin-bottom: 10px;">
+                        <img src="../<?= htmlspecialchars($item['image']) ?>" alt="Current Image" style="max-width: 100px; border-radius: 4px;">
+                    </div>
+                <?php endif; ?>
+                <input type="file" name="image" accept="image/*" style="width: 100%; padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
             </div>
             
             <div style="margin-bottom: 1.5rem;">
@@ -151,7 +178,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                     <tr>
                         <td>
                             <?php if ($attorney['image']): ?>
-                                <img src="<?= htmlspecialchars($attorney['image']) ?>" alt="Photo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                <img src="<?= str_starts_with($attorney['image'], 'http') ? htmlspecialchars($attorney['image']) : '../' . htmlspecialchars($attorney['image']) ?>" alt="Photo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
                             <?php else: ?>
                                 <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;"><i class="fas fa-user"></i></div>
                             <?php endif; ?>
