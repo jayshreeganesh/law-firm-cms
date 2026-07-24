@@ -1,0 +1,14 @@
+# Database connection configuration
+includes/config.php
+
+# SQLite Database
+*.sqlite
+database.sqlite
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+error_log
+*.log

@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("INSERT INTO messages (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)");
         if ($stmt->execute([$name, $email, $phone, $subject, $message])) {
             $success = true;
+            $admin_email = get_setting($pdo, 'site_email') ?: 'admin@lawfirm.local';
+            $from_email = get_setting($pdo, 'smtp_from_email') ?: 'no-reply@lawfirm.local';
+            @mail($admin_email, "New Contact Message: $subject", "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message", "From: $from_email");
         } else {
             $error = 'Failed to send message. Please try again.';
         }

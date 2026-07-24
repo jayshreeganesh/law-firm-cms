@@ -3,9 +3,9 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <h1>Relentless Advocacy.<br>Proven Results.</h1>
-        <p>We provide exceptional legal representation tailored to your unique needs. Our experienced attorneys are dedicated to protecting your rights and achieving the best possible outcome.</p>
-        <a href="book.php" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Schedule a Consultation</a>
+        <h1><?= $lang['hero_title'] ?></h1>
+        <p><?= $lang['hero_desc'] ?></p>
+        <a href="book.php" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;"><?= $lang['schedule_consultation'] ?></a>
     </div>
 </section>
 
@@ -16,7 +16,7 @@ if (count($results) > 0):
 ?>
 <section class="section" style="background-color: var(--primary-color); color: white;">
     <div class="container text-center">
-        <h2 style="color: white; margin-bottom: 3rem;">Recent Victories</h2>
+        <h2 style="color: white; margin-bottom: 3rem;"><?= $lang['recent_victories'] ?></h2>
         <div class="grid-3">
             <?php foreach ($results as $res): ?>
             <div class="card" style="background-color: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-align: left;">

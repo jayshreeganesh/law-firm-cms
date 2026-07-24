@@ -53,6 +53,11 @@ if ($action === 'delete' && isset($_GET['id'])) {
                     <td>
                         <strong><?= date('M j, Y', strtotime($appt['appointment_date'])) ?></strong><br>
                         <span style="color: #64748b; font-size: 0.9rem;"><?= date('g:i A', strtotime($appt['appointment_time'])) ?></span>
+                        <?php if (!empty($appt['meeting_link'])): ?>
+                            <div style="margin-top: 0.5rem;">
+                                <a href="<?= htmlspecialchars($appt['meeting_link']) ?>" target="_blank" style="background-color: #2563eb; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; text-decoration: none;"><i class="fas fa-video"></i> Zoom Link</a>
+                            </div>
+                        <?php endif; ?>
                     </td>
                     <td>
                         <span style="font-weight: 500;"><?= htmlspecialchars($appt['name']) ?></span><br>

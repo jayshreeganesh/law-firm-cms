@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'Home',
+    'about_us' => 'About Us',
+    'practice_areas' => 'Practice Areas',
+    'our_attorneys' => 'Our Attorneys',
+    'news' => 'News',
+    'contact' => 'Contact Us',
+    'client_portal' => 'Client Portal',
+    'free_consultation' => 'Free Consultation',
+    'schedule_consultation' => 'Schedule a Consultation',
+    'hero_title' => 'Relentless Advocacy.<br>Proven Results.',
+    'hero_desc' => 'We provide exceptional legal representation tailored to your unique needs. Our experienced attorneys are dedicated to protecting your rights and achieving the best possible outcome.',
+    'recent_victories' => 'Recent Victories',
+    'subscribe_newsletter' => 'Subscribe to Newsletter',
+    'newsletter_desc' => 'Get the latest legal insights and firm updates delivered to your inbox.',
+    'email_address' => 'Email Address',
+    'subscribe' => 'Subscribe',
+    'quick_links' => 'Quick Links',
+    'disclaimer' => 'Disclaimer',
+    'disclaimer_text' => 'The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation.',
+    'contact_info' => 'Contact Info',
+];

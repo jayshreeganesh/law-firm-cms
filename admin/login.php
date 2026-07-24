@@ -12,10 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_username'] = $user['username'];
-        $_SESSION['admin_id'] = $user['id'];
-        header("Location: index.php");
+        $code = sprintf("%06d", mt_rand(1, 999999));
+        $pdo->prepare("UPDATE users SET two_factor_code = ? WHERE id = ?")->execute([$code, $user['id']]);
+        
+        // Simulate sending email
+        require_once '../includes/db.php';
+        $from_email = get_setting($pdo, 'smtp_from_email') ?: 'no-reply@lawfirm.local';
+        @mail($user['email'] ?? 'admin@local', "Your 2FA Code", "Your login code is: $code", "From: $from_email");
+        
+        $_SESSION['pending_2fa_admin'] = $user['id'];
+        header("Location: verify_2fa.php");
         exit;
     } else {
         $error = 'Invalid username or password.';

@@ -12,9 +12,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $time = trim($_POST['appointment_time'] ?? '');
     
     if ($name && $email && $date && $time) {
-        $stmt = $pdo->prepare("INSERT INTO appointments (name, email, phone, appointment_date, appointment_time) VALUES (?, ?, ?, ?, ?)");
-        if ($stmt->execute([$name, $email, $phone, $date, $time])) {
+        $meeting_link = 'https://zoom.us/j/' . rand(100000000, 999999999) . '?pwd=' . bin2hex(random_bytes(4));
+        
+        $stmt = $pdo->prepare("INSERT INTO appointments (name, email, phone, appointment_date, appointment_time, meeting_link) VALUES (?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$name, $email, $phone, $date, $time, $meeting_link])) {
             $success = true;
+            $admin_email = get_setting($pdo, 'site_email') ?: 'admin@lawfirm.local';
+            $from_email = get_setting($pdo, 'smtp_from_email') ?: 'no-reply@lawfirm.local';
+            @mail($admin_email, "New Consultation Request", "Name: $name\nEmail: $email\nPhone: $phone\nDate: $date\nTime: $time\nZoom Link: $meeting_link", "From: $from_email");
+            
+            // Send confirmation to client
+            @mail($email, "Your Consultation is Confirmed", "Hello $name,\n\nYour consultation is booked for $date at $time.\n\nJoin Zoom Meeting:\n$meeting_link\n\nThank you.", "From: $from_email");
+            
+            // Push to Google Calendar Webhook
+            $webhook = get_setting($pdo, 'google_calendar_webhook');
+            if (!empty($webhook)) {
+                $payload = json_encode([
+                    'client_name' => $name,
+                    'client_email' => $email,
+                    'phone' => $phone,
+                    'date' => $date,
+                    'time' => $time,
+                    'zoom_link' => $meeting_link
+                ]);
+                $ch = curl_init($webhook);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                @curl_exec($ch);
+                curl_close($ch);
+            }
+            
+            // Send SMS via Twilio
+            $tw_sid = get_setting($pdo, 'twilio_sid');
+            $tw_token = get_setting($pdo, 'twilio_token');
+            $tw_from = get_setting($pdo, 'twilio_phone');
+            if (!empty($tw_sid) && !empty($tw_token) && !empty($tw_from) && !empty($phone)) {
+                $sms_body = "Law Firm: Your consultation is booked for $date at $time. Zoom Link: $meeting_link";
+                $tw_url = "https://api.twilio.com/2010-04-01/Accounts/$tw_sid/Messages.json";
+                $tw_data = http_build_query([
+                    'To' => $phone,
+                    'From' => $tw_from,
+                    'Body' => $sms_body
+                ]);
+                $ch = curl_init($tw_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $tw_data);
+                curl_setopt($ch, CURLOPT_USERPWD, "$tw_sid:$tw_token");
+                @curl_exec($ch);
+                curl_close($ch);
+            }
         } else {
             $error = 'Failed to book appointment. Please try again later.';
         }

@@ -3,6 +3,26 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+// Offline Localization System
+if (isset($_GET['lang'])) {
+    $allowed_langs = ['en', 'hi', 'mr', 'gu'];
+    if (in_array($_GET['lang'], $allowed_langs)) {
+        $_SESSION['app_lang'] = $_GET['lang'];
+    }
+    // Redirect to remove ?lang= from url
+    $url = strtok($_SERVER["REQUEST_URI"], '?');
+    header("Location: $url");
+    exit;
+}
+$current_lang = $_SESSION['app_lang'] ?? 'en';
+$lang_file = __DIR__ . "/../lang/{$current_lang}.php";
+if (file_exists($lang_file)) {
+    require_once $lang_file;
+} else {
+    require_once __DIR__ . "/../lang/en.php";
+}
+
 // Page View Analytics Tracking
 try {
     $current_url = $_SERVER['REQUEST_URI'];
@@ -16,7 +36,7 @@ try {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $current_lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,14 +64,19 @@ try {
             Justice<span>.</span>
         </a>
         <ul class="nav-links">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php"><?= $lang['home'] ?></a></li>
             <li><a href="about.php">About Us</a></li>
-            <li><a href="practice-areas.php">Practice Areas</a></li>
-            <li><a href="attorneys.php">Attorneys</a></li>
-            <li><a href="blog.php">News</a></li>
-            <li><a href="contact.php">Contact</a></li>
+            <li><a href="practice-areas.php"><?= $lang['practice_areas'] ?></a></li>
+            <li><a href="attorneys.php"><?= $lang['our_attorneys'] ?></a></li>
+            <li><a href="blog.php"><?= $lang['news'] ?></a></li>
+            <li><a href="contact.php"><?= $lang['contact'] ?></a></li>
         </ul>
-        <a href="book.php" class="btn btn-primary">Free Consultation</a>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button id="darkModeToggleFront" class="btn" style="background: none; border: none; font-size: 1.25rem; color: var(--text-color); cursor: pointer;">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="book.php" class="btn btn-primary"><?= $lang['free_consultation'] ?></a>
+        </div>
         <button class="mobile-menu-btn">
             <i class="fas fa-bars"></i>
         </button>
@@ -59,8 +84,18 @@ try {
     
     <!-- Multi-Language Support Widget -->
     <div style="background-color: #f1f5f9; padding: 5px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem;">
-        <div class="container" style="display: flex; justify-content: flex-end;">
-            <div id="google_translate_element"></div>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <strong>Native Offline Languages:</strong>
+                <a href="?lang=en" style="text-decoration: none; color: <?= $current_lang == 'en' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'en' ? 'bold' : 'normal' ?>;">English</a> |
+                <a href="?lang=hi" style="text-decoration: none; color: <?= $current_lang == 'hi' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'hi' ? 'bold' : 'normal' ?>;">हिन्दी (Hindi)</a> |
+                <a href="?lang=mr" style="text-decoration: none; color: <?= $current_lang == 'mr' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'mr' ? 'bold' : 'normal' ?>;">मराठी (Marathi)</a> |
+                <a href="?lang=gu" style="text-decoration: none; color: <?= $current_lang == 'gu' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'gu' ? 'bold' : 'normal' ?>;">ગુજરાતી (Gujarati)</a>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: #64748b;">Or translate to any language via Google:</span>
+                <div id="google_translate_element"></div>
+            </div>
         </div>
     </div>
 </header>

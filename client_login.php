@@ -18,9 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $client = $stmt->fetch();
         
         if ($client && password_verify($password, $client['password'])) {
-            $_SESSION['client_id'] = $client['id'];
-            $_SESSION['client_name'] = $client['name'];
-            header("Location: client_dashboard.php");
+            $code = sprintf("%06d", mt_rand(1, 999999));
+            $pdo->prepare("UPDATE clients SET two_factor_code = ? WHERE id = ?")->execute([$code, $client['id']]);
+            
+            // Simulate sending email
+            $from_email = get_setting($pdo, 'smtp_from_email') ?: 'no-reply@lawfirm.local';
+            @mail($client['email'], "Your Secure Portal Code", "Your login code is: $code", "From: $from_email");
+            
+            $_SESSION['pending_2fa_client'] = $client['id'];
+            header("Location: verify_client_2fa.php");
             exit;
         } else {
             $error = "Invalid credentials.";

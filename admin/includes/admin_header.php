@@ -33,16 +33,25 @@ if ($current_page !== 'login.php' && !isset($_SESSION['admin_logged_in'])) {
         </a>
         <ul class="sidebar-nav">
             <li><a href="index.php" class="<?= $current_page == 'index.php' ? 'active' : '' ?>"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <?php if (!isset($_SESSION['admin_role']) || $_SESSION['admin_role'] === 'superadmin' || $_SESSION['admin_role'] === 'attorney'): ?>
             <li><a href="posts.php" class="<?= $current_page == 'posts.php' ? 'active' : '' ?>"><i class="fas fa-newspaper"></i> Blog Posts</a></li>
+            <?php endif; ?>
+            <?php if (!isset($_SESSION['admin_role']) || $_SESSION['admin_role'] === 'superadmin'): ?>
             <li><a href="practice_areas.php" class="<?= $current_page == 'practice_areas.php' ? 'active' : '' ?>"><i class="fas fa-balance-scale"></i> Practice Areas</a></li>
             <li><a href="case_results.php" class="<?= $current_page == 'case_results.php' ? 'active' : '' ?>"><i class="fas fa-trophy"></i> Case Results</a></li>
             <li><a href="attorneys.php" class="<?= $current_page == 'attorneys.php' ? 'active' : '' ?>"><i class="fas fa-user-tie"></i> Attorneys</a></li>
+            <?php endif; ?>
             <li><a href="appointments.php" class="<?= $current_page == 'appointments.php' ? 'active' : '' ?>"><i class="fas fa-calendar-check"></i> Appointments</a></li>
             <li><a href="messages.php" class="<?= $current_page == 'messages.php' ? 'active' : '' ?>"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="chat.php" class="<?= $current_page == 'chat.php' ? 'active' : '' ?>"><i class="fas fa-comments"></i> Team Chat</a></li>
+            <?php if (!isset($_SESSION['admin_role']) || $_SESSION['admin_role'] === 'superadmin'): ?>
             <li><a href="newsletter.php" class="<?= $current_page == 'newsletter.php' ? 'active' : '' ?>"><i class="fas fa-mail-bulk"></i> Newsletter</a></li>
             <li><a href="clients.php" class="<?= $current_page == 'clients.php' ? 'active' : '' ?>"><i class="fas fa-user-lock"></i> Client Portal</a></li>
+            <li><a href="forms.php" class="<?= $current_page == 'forms.php' ? 'active' : '' ?>"><i class="fas fa-wpforms"></i> Form Builder</a></li>
             <li><a href="users.php" class="<?= $current_page == 'users.php' ? 'active' : '' ?>"><i class="fas fa-users-cog"></i> Admin Users</a></li>
+            <li><a href="audit_logs.php" class="<?= $current_page == 'audit_logs.php' ? 'active' : '' ?>"><i class="fas fa-list-alt"></i> Audit Trail</a></li>
             <li><a href="settings.php" class="<?= $current_page == 'settings.php' ? 'active' : '' ?>"><i class="fas fa-cogs"></i> Settings</a></li>
+            <?php endif; ?>
             <li><a href="../index.php" target="_blank"><i class="fas fa-external-link-alt"></i> View Site</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
@@ -57,8 +66,40 @@ if ($current_page !== 'login.php' && !isset($_SESSION['admin_logged_in'])) {
                 elseif($current_page == 'messages.php') echo 'Messages';
                 ?>
             </h2>
-            <div>
-                Logged in as <strong><?= htmlspecialchars($_SESSION['admin_username']) ?></strong>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button id="darkModeToggle" class="btn" style="background: none; border: none; font-size: 1.25rem; color: var(--admin-text); cursor: pointer;">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <span>Welcome, <strong><?= htmlspecialchars($_SESSION['admin_username'] ?? 'User') ?></strong></span>
+                <span style="background-color: var(--admin-accent); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; text-transform: uppercase;">
+                    <?= htmlspecialchars($_SESSION['admin_role'] ?? 'Role') ?>
+                </span>
             </div>
         </div>
+        
+        <script>
+        const toggleBtn = document.getElementById('darkModeToggle');
+        if (toggleBtn) {
+            const icon = toggleBtn.querySelector('i');
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            
+            toggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
+        </script>
 <?php endif; ?>

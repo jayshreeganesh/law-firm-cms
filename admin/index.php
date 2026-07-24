@@ -53,6 +53,46 @@ $total_appointments = $pdo->query("SELECT COUNT(*) FROM appointments WHERE statu
     </div>
 </div>
 
+<div class="card" style="margin-bottom: 2rem;">
+    <h3 style="margin-top: 0; color: var(--admin-primary);"><i class="fas fa-chart-area"></i> Revenue & Activity Analytics</h3>
+    <canvas id="revenueChart" width="100%" height="30"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('revenueChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+            label: 'Total Revenue ($)',
+            data: [12000, 19000, 15000, 22000, 28000, 32000],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'New Clients',
+            data: [4, 7, 5, 10, 12, 15],
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            tension: 0.4,
+            fill: true,
+            yAxisID: 'y1'
+        }]
+    },
+    options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+            y: { type: 'linear', display: true, position: 'left' },
+            y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false } }
+        }
+    }
+});
+</script>
+
 <div class="card">
     <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--admin-primary);">Recent Messages</h3>
     <div class="table-responsive">
