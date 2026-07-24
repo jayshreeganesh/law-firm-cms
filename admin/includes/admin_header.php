@@ -35,8 +35,12 @@ if ($current_page !== 'login.php' && !isset($_SESSION['admin_logged_in'])) {
             <li><a href="index.php" class="<?= $current_page == 'index.php' ? 'active' : '' ?>"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="posts.php" class="<?= $current_page == 'posts.php' ? 'active' : '' ?>"><i class="fas fa-newspaper"></i> Blog Posts</a></li>
             <li><a href="practice_areas.php" class="<?= $current_page == 'practice_areas.php' ? 'active' : '' ?>"><i class="fas fa-balance-scale"></i> Practice Areas</a></li>
+            <li><a href="case_results.php" class="<?= $current_page == 'case_results.php' ? 'active' : '' ?>"><i class="fas fa-trophy"></i> Case Results</a></li>
             <li><a href="attorneys.php" class="<?= $current_page == 'attorneys.php' ? 'active' : '' ?>"><i class="fas fa-user-tie"></i> Attorneys</a></li>
+            <li><a href="appointments.php" class="<?= $current_page == 'appointments.php' ? 'active' : '' ?>"><i class="fas fa-calendar-check"></i> Appointments</a></li>
             <li><a href="messages.php" class="<?= $current_page == 'messages.php' ? 'active' : '' ?>"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="newsletter.php" class="<?= $current_page == 'newsletter.php' ? 'active' : '' ?>"><i class="fas fa-mail-bulk"></i> Newsletter</a></li>
+            <li><a href="clients.php" class="<?= $current_page == 'clients.php' ? 'active' : '' ?>"><i class="fas fa-user-lock"></i> Client Portal</a></li>
             <li><a href="users.php" class="<?= $current_page == 'users.php' ? 'active' : '' ?>"><i class="fas fa-users-cog"></i> Admin Users</a></li>
             <li><a href="settings.php" class="<?= $current_page == 'settings.php' ? 'active' : '' ?>"><i class="fas fa-cogs"></i> Settings</a></li>
             <li><a href="../index.php" target="_blank"><i class="fas fa-external-link-alt"></i> View Site</a></li>

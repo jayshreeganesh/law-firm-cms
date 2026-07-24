@@ -70,3 +70,54 @@ INSERT INTO practice_areas (title, description, icon) VALUES
 ('Family Law', 'Compassionate representation in divorce, child custody, and other family-related legal matters.', 'fas fa-users'),
 ('Criminal Defense', 'Vigorous defense against criminal charges, protecting your rights and freedom.', 'fas fa-gavel')
 ON DUPLICATE KEY UPDATE id=id;
+
+CREATE TABLE IF NOT EXISTS case_results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    amount VARCHAR(50),
+    case_type VARCHAR(100),
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS clients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS client_documents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    uploaded_by ENUM('client', 'admin') DEFAULT 'client',
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS appointments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(50),
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS page_views (
+    view_date DATE NOT NULL,
+    page_url VARCHAR(255) NOT NULL,
+    views INT DEFAULT 1,
+    PRIMARY KEY (view_date, page_url)
+);

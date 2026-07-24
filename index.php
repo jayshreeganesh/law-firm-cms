@@ -5,12 +5,35 @@
     <div class="container">
         <h1>Relentless Advocacy.<br>Proven Results.</h1>
         <p>We provide exceptional legal representation tailored to your unique needs. Our experienced attorneys are dedicated to protecting your rights and achieving the best possible outcome.</p>
-        <a href="contact.php" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Schedule a Consultation</a>
+        <a href="book.php" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Schedule a Consultation</a>
     </div>
 </section>
 
-<!-- Practice Areas Section -->
-<section class="section bg-white">
+<?php
+$stmt = $pdo->query("SELECT * FROM case_results ORDER BY created_at DESC LIMIT 3");
+$results = $stmt->fetchAll();
+if (count($results) > 0):
+?>
+<section class="section" style="background-color: var(--primary-color); color: white;">
+    <div class="container text-center">
+        <h2 style="color: white; margin-bottom: 3rem;">Recent Victories</h2>
+        <div class="grid-3">
+            <?php foreach ($results as $res): ?>
+            <div class="card" style="background-color: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-align: left;">
+                <h3 style="color: var(--secondary-color); font-size: 2.5rem; margin-bottom: 0.5rem;"><?= htmlspecialchars($res['amount']) ?></h3>
+                <h4 style="color: white; font-size: 1.25rem; margin-bottom: 0.5rem;"><?= htmlspecialchars($res['title']) ?></h4>
+                <p style="color: #94a3b8; font-weight: bold; margin-bottom: 1rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;"><?= htmlspecialchars($res['case_type']) ?></p>
+                <?php if ($res['description']): ?>
+                    <p style="color: #cbd5e1; font-style: italic;">"<?= htmlspecialchars($res['description']) ?>"</p>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<section class="section bg-light">
     <div class="container">
         <h2 class="section-title">Our Practice Areas</h2>
         <div class="grid-3">

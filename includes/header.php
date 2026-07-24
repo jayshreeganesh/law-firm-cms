@@ -1,4 +1,20 @@
 <?php require_once 'db.php'; ?>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// Page View Analytics Tracking
+try {
+    $current_url = $_SERVER['REQUEST_URI'];
+    // Filter out query parameters for cleaner analytics if desired, or keep as is
+    $parsed_url = parse_url($current_url, PHP_URL_PATH);
+    $today = date('Y-m-d');
+    $stmt = $pdo->prepare("INSERT INTO page_views (view_date, page_url, views) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE views = views + 1");
+    $stmt->execute([$today, $parsed_url]);
+} catch (Exception $e) {
+    // Silently ignore if DB isn't ready
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +51,23 @@
             <li><a href="blog.php">News</a></li>
             <li><a href="contact.php">Contact</a></li>
         </ul>
-        <a href="contact.php" class="btn btn-primary">Free Consultation</a>
+        <a href="book.php" class="btn btn-primary">Free Consultation</a>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <!-- Multi-Language Support Widget -->
+    <div style="background-color: #f1f5f9; padding: 5px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem;">
+        <div class="container" style="display: flex; justify-content: flex-end;">
+            <div id="google_translate_element"></div>
+        </div>
     </div>
 </header>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
