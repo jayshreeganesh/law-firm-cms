@@ -1,0 +1,55 @@
+<?php require_once 'includes/header.php'; ?>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1>Relentless Advocacy.<br>Proven Results.</h1>
+        <p>We provide exceptional legal representation tailored to your unique needs. Our experienced attorneys are dedicated to protecting your rights and achieving the best possible outcome.</p>
+        <a href="contact.php" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Schedule a Consultation</a>
+    </div>
+</section>
+
+<!-- Practice Areas Section -->
+<section class="section bg-white">
+    <div class="container">
+        <h2 class="section-title">Our Practice Areas</h2>
+        <div class="grid-3">
+            <?php
+            $stmt = $pdo->query("SELECT * FROM practice_areas ORDER BY id DESC LIMIT 3");
+            while ($row = $stmt->fetch()):
+            ?>
+            <div class="card">
+                <i class="<?= htmlspecialchars($row['icon']) ?>"></i>
+                <h3><?= htmlspecialchars($row['title']) ?></h3>
+                <p><?= htmlspecialchars($row['description']) ?></p>
+            </div>
+            <?php endwhile; ?>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="practice-areas.php" class="btn btn-primary">View All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section" style="background-color: var(--primary-color); color: white;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+            <div>
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1.5rem;">Why Choose Justice Partners?</h2>
+                <p style="color: #cbd5e1; margin-bottom: 2rem; font-size: 1.1rem;">With decades of combined experience, our law firm has built a reputation for excellence, integrity, and unwavering dedication to our clients.</p>
+                <ul style="list-style: none; color: #cbd5e1;">
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> Decades of Trial Experience</li>
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> Award-Winning Legal Team</li>
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> Free Initial Consultations</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> 24/7 Availability for Urgent Matters</li>
+                </ul>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1505664177941-6d2524a80695?auto=format&fit=crop&q=80" alt="Law Office" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow-lg);">
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php require_once 'includes/footer.php'; ?>
