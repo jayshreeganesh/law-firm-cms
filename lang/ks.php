@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'گھر',
+    'about_us' => 'سٲنؠ بارس منٛز',
+    'practice_areas' => 'پریٚکٹس علاقہٕ',
+    'our_attorneys' => 'سٲنؠ وکیٖل',
+    'news' => 'خَبَر',
+    'contact' => 'رٲبطہٕ کٔرِو',
+    'client_portal' => 'کلائنٹ پورٹل',
+    'free_consultation' => 'مُفُت مَشؤرٕ',
+    'schedule_consultation' => 'مَشؤرٕ شِڈول کٔرِو',
+    'hero_title' => 'مسلسل وکالت۔<br>ثابت شُدہ نٔتیٖجٕ۔',
+    'hero_desc' => 'أسؠ چھِ تُہنٛدِ ضروٗرت مُطٲبِق بہتٔریٖن قٲنوٗنی مَدَتھ فراہم کران۔',
+    'recent_victories' => 'حٲلیہ کٲمیٲبی',
+    'subscribe_newsletter' => 'نیوٗز لیٹر سَبسکرایب کٔرِو',
+    'newsletter_desc' => 'قٲنوٗنی معلوٗماتھ حٲصِل کٔرِو۔',
+    'email_address' => 'ای میٖل ایڈریس',
+    'subscribe' => 'سَبسکرایب',
+    'quick_links' => 'تێز لِنک',
+    'disclaimer' => 'ڈِسکلیمر',
+    'disclaimer_text' => 'یَتھ ویب سایٹَس پؠٹھ مولوٗماتھ چھِ سِرف عام مولوٗماتھ خٲطرٕ۔',
+    'contact_info' => 'رٲبطہٕ مولوٗماتھ',
+];

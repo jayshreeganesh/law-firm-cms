@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'मुखेल पान',
+    'about_us' => 'आमच्या विशीं',
+    'practice_areas' => 'सराव वाठार',
+    'our_attorneys' => 'आमचे वकील',
+    'news' => 'बातम्यो',
+    'contact' => 'संपर्क करात',
+    'client_portal' => 'क्लायंट पोर्टल',
+    'free_consultation' => 'फुकट सल्लो',
+    'schedule_consultation' => 'सल्लो थारायात',
+    'hero_title' => 'सतत वकिली.<br>सिद्ध जाल्ले परिणाम.',
+    'hero_desc' => 'आमी तुमच्यो गर्जो वळखून खाशेली कायदेशीर मदत दितात.',
+    'recent_victories' => 'हालींचे जैत',
+    'subscribe_newsletter' => 'न्यूजलेटर सबस्क्रायब करात',
+    'newsletter_desc' => 'कायदेशीर म्हायती मेळयात.',
+    'email_address' => 'ईमेल पत्तो',
+    'subscribe' => 'सबस्क्रायब',
+    'quick_links' => 'वेळार दुवे',
+    'disclaimer' => 'न्हयकारणी',
+    'disclaimer_text' => 'ह्या वेबावयली म्हायती फकत सादारण म्हायती खातीर आसा.',
+    'contact_info' => 'संपर्क म्हायती',
+];

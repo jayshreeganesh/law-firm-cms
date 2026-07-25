@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'घर',
+    'about_us' => 'साढ़े बारे च',
+    'practice_areas' => 'अभ्यास दे खित्ते',
+    'our_attorneys' => 'साढ़े वकील',
+    'news' => 'खबरां',
+    'contact' => 'संपर्क करो',
+    'client_portal' => 'क्लाइंट पोर्टल',
+    'free_consultation' => 'मुफ्त सलाह',
+    'schedule_consultation' => 'सलाह दा समय तय करो',
+    'hero_title' => 'लगातार वकालत।<br>साबत नतीजे।',
+    'hero_desc' => 'अस्स तुंदी जरूरतें दे मताबक बक्खरी कानूनी मदद दिंदे आं।',
+    'recent_victories' => 'नमीं जित्तां',
+    'subscribe_newsletter' => 'न्यूजलेटर सब्सक्राइब करो',
+    'newsletter_desc' => 'कानूनी खबरां हासल करो।',
+    'email_address' => 'ईमेल पता',
+    'subscribe' => 'सब्सक्राइब',
+    'quick_links' => 'जल्दी लिंक',
+    'disclaimer' => 'दावा छोड़ना',
+    'disclaimer_text' => 'इस वेबसाइट दी जानकारी सिर्फ आम जानकारी लेई ऐ।',
+    'contact_info' => 'संपर्क जानकारी',
+];

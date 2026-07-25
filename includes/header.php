@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Offline Localization System
 if (isset($_GET['lang'])) {
-    $allowed_langs = ['en', 'hi', 'mr', 'gu', 'bn', 'te', 'ta', 'ur', 'kn', 'or', 'ml', 'pa'];
+    $allowed_langs = ['en', 'as', 'bn', 'brx', 'doi', 'gu', 'hi', 'kn', 'ks', 'gom', 'mai', 'ml', 'mni', 'mr', 'ne', 'or', 'pa', 'sa', 'sat', 'sd', 'ta', 'te', 'ur'];
     if (in_array($_GET['lang'], $allowed_langs)) {
         $_SESSION['app_lang'] = $_GET['lang'];
     }
@@ -90,17 +90,28 @@ try {
                 <strong>Native Offline Languages:</strong>
                 <select onchange="window.location.href='?lang='+this.value" style="padding: 2px 5px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.85rem;">
                     <option value="en" <?= $current_lang == 'en' ? 'selected' : '' ?>>English</option>
-                    <option value="hi" <?= $current_lang == 'hi' ? 'selected' : '' ?>>हिन्दी (Hindi)</option>
+                    <option value="as" <?= $current_lang == 'as' ? 'selected' : '' ?>>অসমীয়া (Assamese)</option>
                     <option value="bn" <?= $current_lang == 'bn' ? 'selected' : '' ?>>বাংলা (Bengali)</option>
-                    <option value="te" <?= $current_lang == 'te' ? 'selected' : '' ?>>తెలుగు (Telugu)</option>
-                    <option value="mr" <?= $current_lang == 'mr' ? 'selected' : '' ?>>मराठी (Marathi)</option>
-                    <option value="ta" <?= $current_lang == 'ta' ? 'selected' : '' ?>>தமிழ் (Tamil)</option>
-                    <option value="ur" <?= $current_lang == 'ur' ? 'selected' : '' ?>>اردو (Urdu)</option>
+                    <option value="brx" <?= $current_lang == 'brx' ? 'selected' : '' ?>>बर’ (Bodo)</option>
+                    <option value="doi" <?= $current_lang == 'doi' ? 'selected' : '' ?>>डोगरी (Dogri)</option>
                     <option value="gu" <?= $current_lang == 'gu' ? 'selected' : '' ?>>ગુજરાતી (Gujarati)</option>
+                    <option value="hi" <?= $current_lang == 'hi' ? 'selected' : '' ?>>हिन्दी (Hindi)</option>
                     <option value="kn" <?= $current_lang == 'kn' ? 'selected' : '' ?>>ಕನ್ನಡ (Kannada)</option>
-                    <option value="or" <?= $current_lang == 'or' ? 'selected' : '' ?>>ଓଡ଼ିଆ (Odia)</option>
+                    <option value="ks" <?= $current_lang == 'ks' ? 'selected' : '' ?>>کٲشُر (Kashmiri)</option>
+                    <option value="gom" <?= $current_lang == 'gom' ? 'selected' : '' ?>>कोंकणी (Konkani)</option>
+                    <option value="mai" <?= $current_lang == 'mai' ? 'selected' : '' ?>>मैथिली (Maithili)</option>
                     <option value="ml" <?= $current_lang == 'ml' ? 'selected' : '' ?>>മലയാളം (Malayalam)</option>
+                    <option value="mni" <?= $current_lang == 'mni' ? 'selected' : '' ?>>মৈতৈলোন (Manipuri)</option>
+                    <option value="mr" <?= $current_lang == 'mr' ? 'selected' : '' ?>>मराठी (Marathi)</option>
+                    <option value="ne" <?= $current_lang == 'ne' ? 'selected' : '' ?>>नेपाली (Nepali)</option>
+                    <option value="or" <?= $current_lang == 'or' ? 'selected' : '' ?>>ଓଡ଼ିଆ (Odia)</option>
                     <option value="pa" <?= $current_lang == 'pa' ? 'selected' : '' ?>>ਪੰਜਾਬੀ (Punjabi)</option>
+                    <option value="sa" <?= $current_lang == 'sa' ? 'selected' : '' ?>>संस्कृतम् (Sanskrit)</option>
+                    <option value="sat" <?= $current_lang == 'sat' ? 'selected' : '' ?>>ᱥᱟᱱᱛᱟᱲᱤ (Santali)</option>
+                    <option value="sd" <?= $current_lang == 'sd' ? 'selected' : '' ?>>سنڌي (Sindhi)</option>
+                    <option value="ta" <?= $current_lang == 'ta' ? 'selected' : '' ?>>தமிழ் (Tamil)</option>
+                    <option value="te" <?= $current_lang == 'te' ? 'selected' : '' ?>>తెలుగు (Telugu)</option>
+                    <option value="ur" <?= $current_lang == 'ur' ? 'selected' : '' ?>>اردو (Urdu)</option>
                 </select>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">

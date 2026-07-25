@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'هوم',
+    'about_us' => 'اسان جي باري ۾',
+    'practice_areas' => 'عمل جا ميدان',
+    'our_attorneys' => 'اسان جا وڪيل',
+    'news' => 'خبرون',
+    'contact' => 'رابطو ڪريو',
+    'client_portal' => 'ڪلائنٽ پورٽل',
+    'free_consultation' => 'مفت مشورو',
+    'schedule_consultation' => 'مشوري جو وقت طئي ڪريو',
+    'hero_title' => 'مسلسل وڪالت.<br>ثابت ٿيل نتيجا.',
+    'hero_desc' => 'اسان توهان جي منفرد ضرورتن مطابق بهترين قانوني نمائندگي فراهم ڪندا آهيون.',
+    'recent_victories' => 'تازو ڪاميابيون',
+    'subscribe_newsletter' => 'نيوز ليٽر سبسڪرائب ڪريو',
+    'newsletter_desc' => 'قانوني معلومات حاصل ڪريو.',
+    'email_address' => 'اي ميل پتو',
+    'subscribe' => 'سبسڪرائب',
+    'quick_links' => 'تڪڙا لنڪ',
+    'disclaimer' => 'دستبرداري',
+    'disclaimer_text' => 'هن ويب سائيٽ تي معلومات صرف عام معلومات لاءِ آهي.',
+    'contact_info' => 'رابطي جي معلومات',
+];

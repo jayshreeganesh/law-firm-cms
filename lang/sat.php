@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'ᱚᱲᱟᱜ',
+    'about_us' => 'ᱟᱞᱮ ᱵᱟᱵᱚᱛ',
+    'practice_areas' => 'ᱠᱟᱹᱢᱤ ᱦᱚᱨᱟ',
+    'our_attorneys' => 'ᱟᱞᱮᱨᱮᱱ ᱩᱠᱤᱞᱠᱚ',
+    'news' => 'ᱠᱷᱚᱵᱚᱨ',
+    'contact' => 'ᱡᱚᱜᱟᱡᱚᱜᱽ ᱢᱮ',
+    'client_portal' => 'ᱠᱞᱟᱭᱮᱱᱴ ᱯᱚᱨᱴᱟᱞ',
+    'free_consultation' => 'ᱵᱤᱱᱟᱹ ᱜᱚᱱᱚᱝ ᱯᱚᱨᱟᱢᱚᱨᱥᱚ',
+    'schedule_consultation' => 'ᱯᱚᱨᱟᱢᱚᱨᱥᱚ ᱚᱠᱛᱚ ᱴᱷᱤᱠ ᱢᱮ',
+    'hero_title' => 'ᱞᱮᱛᱟᱲ ᱜᱚᱲᱚ᱾<br>ᱯᱨᱚᱢᱟᱱᱟᱱ ᱚᱨᱡᱚ᱾',
+    'hero_desc' => 'ᱟᱞᱮ ᱟᱢᱟᱜ ᱞᱟᱹᱠᱛᱤ ᱞᱮᱠᱟᱛᱮ ᱵᱷᱟᱹᱜᱤ ᱟᱭᱤᱱ ᱜᱚᱲᱚ ᱞᱮ ᱮᱢᱚᱜᱼᱟ᱾',
+    'recent_victories' => 'ᱱᱟᱶᱟ ᱡᱤᱛᱠᱟᱹᱨ',
+    'subscribe_newsletter' => 'ᱱᱤᱣᱡᱽᱞᱮᱴᱟᱨ ᱥᱟᱵᱽᱥᱠᱨᱟᱭᱤᱵᱽ ᱢᱮ',
+    'newsletter_desc' => 'ᱟᱭᱤᱱ ᱠᱷᱚᱵᱚᱨ ᱧᱟᱢ ᱢᱮ᱾',
+    'email_address' => 'ᱤᱢᱮᱞ ᱴᱷᱤᱠᱟᱹᱱᱟ',
+    'subscribe' => 'ᱥᱟᱵᱽᱥᱠᱨᱟᱭᱤᱵᱽ',
+    'quick_links' => 'ᱞᱚᱜᱚᱱ ᱞᱤᱸᱠ',
+    'disclaimer' => 'ᱫᱟᱹᱵᱤ ᱵᱟᱹᱱᱩᱜᱼᱟ',
+    'disclaimer_text' => 'ᱱᱚᱶᱟ ᱣᱮᱵᱽᱥᱟᱭᱤᱴ ᱨᱮᱱᱟᱜ ᱠᱷᱚᱵᱚᱨ ᱫᱚ ᱥᱟᱫᱷᱟᱨᱚᱱ ᱠᱷᱚᱵᱚᱨ ᱠᱟᱱᱟ᱾',
+    'contact_info' => 'ᱡᱚᱜᱟᱡᱚᱜᱽ ᱠᱷᱚᱵᱚᱨ',
+];

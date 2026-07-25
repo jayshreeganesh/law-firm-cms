@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'न’',
+    'about_us' => 'जोंनि सोमोन्दै',
+    'practice_areas' => 'हाबाफारि ओनसोल',
+    'our_attorneys' => 'जोंनि उकिलफोर',
+    'news' => 'खौरां',
+    'contact' => 'खौरां लाहो',
+    'client_portal' => 'क्लाइन्ट पर्टेल',
+    'free_consultation' => 'उदां सुबुं-सावरायनाय',
+    'schedule_consultation' => 'सुबुं-सावरायनायनि सम',
+    'hero_title' => 'गख्रों मदद।<br>रोखा फिथाय।',
+    'hero_desc' => 'नोंथांनि गोनांथिफोरखौ सुफुंनो जों मोजां आइननि मदद होयो।',
+    'recent_victories' => 'गोदान देरहासाब',
+    'subscribe_newsletter' => 'निउजलेटर साबसक्राइब खालाम',
+    'newsletter_desc' => 'आइननि खौरां मोन।',
+    'email_address' => 'इमैल थिखाना',
+    'subscribe' => 'साबसक्राइब',
+    'quick_links' => 'गोख्रै लिंक',
+    'disclaimer' => 'दाबि गैया',
+    'disclaimer_text' => 'बे वेबसाइतनि खौरांआ शराश्रा खौरांनि थाखायल’।',
+    'contact_info' => 'खौरां लाहो थिखाना',
+];

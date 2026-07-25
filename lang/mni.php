@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'হোম',
+    'about_us' => 'ঐখোয়গী মরমদা',
+    'practice_areas' => 'প্রেক্টিস এরিয়াসিং',
+    'our_attorneys' => 'ঐখোয়গী উকিলিং',
+    'news' => 'পাউ',
+    'contact' => 'কন্টেক্ত তৌবিয়ু',
+    'client_portal' => 'ক্লায়েন্ট পোর্টেল',
+    'free_consultation' => 'লেপনা তান্নবা',
+    'schedule_consultation' => 'তান্নবা মতম লেপউ',
+    'hero_title' => 'লেপ্পা লৈতবা তেংবাং।<br>প্রমান লৈবা মহৈ।',
+    'hero_desc' => 'ঐখোয়না নহাক্কী মথৌ তাবশিংগী মতুং ইন্না অখন্নবা আইনগী তেংবাং পীরি।',
+    'recent_victories' => 'হন্দক্কী মাইপাকপশিং',
+    'subscribe_newsletter' => 'নিউজলেতর সবস্ক্রাইব তৌবিয়ু',
+    'newsletter_desc' => 'আইনগী পাউ ফংবিয়ু।',
+    'email_address' => 'ইমেইল এদ্রেস',
+    'subscribe' => 'সবস্ক্রাইব',
+    'quick_links' => 'কুইক লিঙ্কশিং',
+    'disclaimer' => 'দাবী নত্তে',
+    'disclaimer_text' => 'ৱেবসাইট অসিগী পাউ অসি ময়ামগী খঙনবা খক্তনি।',
+    'contact_info' => 'কন্টেক্ত ইনফো',
+];
