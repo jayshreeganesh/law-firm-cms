@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'घर',
+    'about_us' => 'म्हारै बारै में',
+    'practice_areas' => 'काम रा खेत्र',
+    'our_attorneys' => 'म्हारा वकील',
+    'news' => 'खबर',
+    'contact' => 'संपर्क करो',
+    'client_portal' => 'क्लाइंट पोर्टल',
+    'free_consultation' => 'मुफ्त सलाह',
+    'schedule_consultation' => 'सलाह रो टेम तय करो',
+    'hero_title' => 'लगातार वकालत।<br>पक्का नतीजा।',
+    'hero_desc' => 'म्हे थारी खास जरूरत रै हिसाब सूं चोखी कानूनी मदद द्यां हां।',
+    'recent_victories' => 'हाल री जीत',
+    'subscribe_newsletter' => 'न्यूजलेटर सब्सक्राइब करो',
+    'newsletter_desc' => 'कानूनी जाणकारी ल्यो।',
+    'email_address' => 'ईमेल पतो',
+    'subscribe' => 'सब्सक्राइब',
+    'quick_links' => 'जल्दी लिंक',
+    'disclaimer' => 'दावो कोनी',
+    'disclaimer_text' => 'इण वेबसाइट री जाणकारी सिर्फ आम जाणकारी खातर है।',
+    'contact_info' => 'संपर्क जाणकारी',
+];

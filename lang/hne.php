@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'घर',
+    'about_us' => 'हमर बारे म',
+    'practice_areas' => 'काम के जगा',
+    'our_attorneys' => 'हमर वकील',
+    'news' => 'खबर',
+    'contact' => 'संपर्क करव',
+    'client_portal' => 'क्लाइंट पोर्टल',
+    'free_consultation' => 'मुफ्त सलाह',
+    'schedule_consultation' => 'सलाह के समय तय करव',
+    'hero_title' => 'लगातार वकालत।<br>पक्का नतीजा।',
+    'hero_desc' => 'हम तुंहर खास जरूरत के हिसाब ले बढ़िया कानूनी मदद देथन।',
+    'recent_victories' => 'हाल के जीत',
+    'subscribe_newsletter' => 'न्यूजलेटर सब्सक्राइब करव',
+    'newsletter_desc' => 'कानूनी जानकारी लेव।',
+    'email_address' => 'ईमेल पता',
+    'subscribe' => 'सब्सक्राइब',
+    'quick_links' => 'जल्दी लिंक',
+    'disclaimer' => 'दावा नइ',
+    'disclaimer_text' => 'ये वेबसाइट के जानकारी सिरिफ आम जानकारी बर हे।',
+    'contact_info' => 'संपर्क जानकारी',
+];

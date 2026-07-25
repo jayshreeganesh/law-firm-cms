@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'घर',
+    'about_us' => 'हमनी के बारे में',
+    'practice_areas' => 'काम के क्षेत्र',
+    'our_attorneys' => 'हमनी के वकील',
+    'news' => 'समाचार',
+    'contact' => 'संपर्क करा',
+    'client_portal' => 'क्लाइंट पोर्टल',
+    'free_consultation' => 'मुफ्त सलाह',
+    'schedule_consultation' => 'सलाह के समय तय करा',
+    'hero_title' => 'लगातार वकालत।<br>पक्का नतीजा।',
+    'hero_desc' => 'हमनी तोहर खास जरूरत के हिसाब से बढ़िया कानूनी मदद देहियो।',
+    'recent_victories' => 'हाल के जीत',
+    'subscribe_newsletter' => 'न्यूजलेटर सब्सक्राइब करा',
+    'newsletter_desc' => 'कानूनी जानकारी पावा।',
+    'email_address' => 'ईमेल पता',
+    'subscribe' => 'सब्सक्राइब',
+    'quick_links' => 'जल्दी लिंक',
+    'disclaimer' => 'अस्वीकरण',
+    'disclaimer_text' => 'ई वेबसाइट के जानकारी खाली आम जानकारी खातिर ह।',
+    'contact_info' => 'संपर्क जानकारी',
+];
