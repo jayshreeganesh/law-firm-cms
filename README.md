@@ -41,6 +41,27 @@ To ensure absolute reliability during deployment, the project ships with both ba
 - **Playwright:** Launches a headless Chromium browser, navigates the live frontend, and verifies that UI elements (like localized titles and admin login portals) render correctly.
   *Run it:* `npm run test`
 
+### 5. Secure Admin Dashboard & Analytics
+The backend is a fully-featured, secure admin portal (`/admin/`) featuring:
+- **Interactive Analytics:** Visual Chart.js representations of page views, form submissions, and user engagement over time.
+- **Audit Logging:** Every action (login, content creation, setting changes) is cryptographically logged to ensure total accountability and security compliance.
+- **Global Settings Management:** Admins can dynamically update Site Name, Contact Info, SEO Meta Tags, and switch between Live AI Chat or Human-Agent Chat widgets on the fly.
+
+### 6. Full Content Management System (CRUD)
+The CMS allows non-technical staff to seamlessly manage all public-facing data:
+- **Practice Areas Management:** Add, edit, and categorize legal services (e.g., Corporate Law, Criminal Defense).
+- **Attorneys Directory:** Manage lawyer profiles, headshots, specializations, and contact details.
+- **News & Legal Blog:** Publish SEO-optimized articles and legal insights directly to the public blog.
+- **Form Submissions:** Review, manage, and respond to incoming Contact Queries and Free Consultation bookings directly from the dashboard.
+
+### 7. Client Portal & Secure Billing
+A dedicated, secure `/client_login.php` portal allowing clients to securely log in, view their active case status, track billable hours, and interact with their assigned attorneys.
+
+### 8. UI/UX & SEO Engine
+- **Dark Mode / Light Mode:** A dynamic frontend theme toggler that remembers user preferences via `localStorage`.
+- **Dynamic SEO:** The CMS automatically injects relevant meta tags, canonical links, and Open Graph data based on the specific page and language being viewed.
+- **AI Chat Assistant:** A floating chat widget in the footer provides immediate, automated assistance to potential clients.
+
 ---
 
 ## 🚀 Installation & Setup
