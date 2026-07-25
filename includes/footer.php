@@ -141,5 +141,6 @@ if (mobileMenuBtn && navLinks) {
 }
 </script>
 
+<?php require_once __DIR__ . '/accessibility.php'; ?>
 </body>
 </html>
