@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'ਹੋਮ',
+    'about_us' => 'ਸਾਡੇ ਬਾਰੇ',
+    'practice_areas' => 'ਅਭਿਆਸ ਖੇਤਰ',
+    'our_attorneys' => 'ਸਾਡੇ ਵਕੀਲ',
+    'news' => 'ਖ਼ਬਰਾਂ',
+    'contact' => 'ਸੰਪਰਕ ਕਰੋ',
+    'client_portal' => 'ਕਲਾਇੰਟ ਪੋਰਟਲ',
+    'free_consultation' => 'ਮੁਫਤ ਸਲਾਹ',
+    'schedule_consultation' => 'ਸਲਾਹ ਮਸ਼ਵਰਾ ਤਹਿ ਕਰੋ',
+    'hero_title' => 'ਅਣਥੱਕ ਵਕਾਲਤ।<br>ਪ੍ਰਮਾਣਿਤ ਨਤੀਜੇ।',
+    'hero_desc' => 'ਅਸੀਂ ਤੁਹਾਡੀਆਂ ਵਿਲੱਖਣ ਜ਼ਰੂਰਤਾਂ ਦੇ ਅਨੁਸਾਰ ਬੇਮਿਸਾਲ ਕਾਨੂੰਨੀ ਪ੍ਰਤੀਨਿਧਤਾ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਾਂ।',
+    'recent_victories' => 'ਹਾਲੀਆ ਜਿੱਤਾਂ',
+    'subscribe_newsletter' => 'ਨਿਊਜ਼ਲੈਟਰ ਦੇ ਗਾਹਕ ਬਣੋ',
+    'newsletter_desc' => 'ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰੋ।',
+    'email_address' => 'ਈਮੇਲ ਪਤਾ',
+    'subscribe' => 'ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ',
+    'quick_links' => 'ਤੁਰੰਤ ਲਿੰਕ',
+    'disclaimer' => 'ਬੇਦਾਅਵਾ',
+    'disclaimer_text' => 'ਇਸ ਵੈਬਸਾਈਟ \'ਤੇ ਜਾਣਕਾਰੀ ਸਿਰਫ ਆਮ ਜਾਣਕਾਰੀ ਲਈ ਹੈ।',
+    'contact_info' => 'ਸੰਪਰਕ ਜਾਣਕਾਰੀ',
+];

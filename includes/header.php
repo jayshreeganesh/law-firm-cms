@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Offline Localization System
 if (isset($_GET['lang'])) {
-    $allowed_langs = ['en', 'hi', 'mr', 'gu'];
+    $allowed_langs = ['en', 'hi', 'mr', 'gu', 'bn', 'te', 'ta', 'ur', 'kn', 'or', 'ml', 'pa'];
     if (in_array($_GET['lang'], $allowed_langs)) {
         $_SESSION['app_lang'] = $_GET['lang'];
     }
@@ -88,13 +88,23 @@ try {
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; gap: 10px; align-items: center;">
                 <strong>Native Offline Languages:</strong>
-                <a href="?lang=en" style="text-decoration: none; color: <?= $current_lang == 'en' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'en' ? 'bold' : 'normal' ?>;">English</a> |
-                <a href="?lang=hi" style="text-decoration: none; color: <?= $current_lang == 'hi' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'hi' ? 'bold' : 'normal' ?>;">हिन्दी (Hindi)</a> |
-                <a href="?lang=mr" style="text-decoration: none; color: <?= $current_lang == 'mr' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'mr' ? 'bold' : 'normal' ?>;">मराठी (Marathi)</a> |
-                <a href="?lang=gu" style="text-decoration: none; color: <?= $current_lang == 'gu' ? 'var(--secondary-color)' : '#64748b' ?>; font-weight: <?= $current_lang == 'gu' ? 'bold' : 'normal' ?>;">ગુજરાતી (Gujarati)</a>
+                <select onchange="window.location.href='?lang='+this.value" style="padding: 2px 5px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                    <option value="en" <?= $current_lang == 'en' ? 'selected' : '' ?>>English</option>
+                    <option value="hi" <?= $current_lang == 'hi' ? 'selected' : '' ?>>हिन्दी (Hindi)</option>
+                    <option value="bn" <?= $current_lang == 'bn' ? 'selected' : '' ?>>বাংলা (Bengali)</option>
+                    <option value="te" <?= $current_lang == 'te' ? 'selected' : '' ?>>తెలుగు (Telugu)</option>
+                    <option value="mr" <?= $current_lang == 'mr' ? 'selected' : '' ?>>मराठी (Marathi)</option>
+                    <option value="ta" <?= $current_lang == 'ta' ? 'selected' : '' ?>>தமிழ் (Tamil)</option>
+                    <option value="ur" <?= $current_lang == 'ur' ? 'selected' : '' ?>>اردو (Urdu)</option>
+                    <option value="gu" <?= $current_lang == 'gu' ? 'selected' : '' ?>>ગુજરાતી (Gujarati)</option>
+                    <option value="kn" <?= $current_lang == 'kn' ? 'selected' : '' ?>>ಕನ್ನಡ (Kannada)</option>
+                    <option value="or" <?= $current_lang == 'or' ? 'selected' : '' ?>>ଓଡ଼ିଆ (Odia)</option>
+                    <option value="ml" <?= $current_lang == 'ml' ? 'selected' : '' ?>>മലയാളം (Malayalam)</option>
+                    <option value="pa" <?= $current_lang == 'pa' ? 'selected' : '' ?>>ਪੰਜਾਬੀ (Punjabi)</option>
+                </select>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="color: #64748b;">Or translate to any Indian language:</span>
+                <span style="color: #64748b;">Or translate to any language via Google:</span>
                 <div id="google_translate_element"></div>
             </div>
         </div>
@@ -103,11 +113,7 @@ try {
 
 <script type="text/javascript">
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en', 
-    includedLanguages: 'en,hi,bn,te,mr,ta,ur,gu,kn,or,ml,pa,as,sa,sd,ne,bho,mai,doi,gom,mni-Mtei',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

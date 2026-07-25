@@ -1,0 +1,23 @@
+<?php
+$lang = [
+    'home' => 'ہوم',
+    'about_us' => 'ہمارے بارے میں',
+    'practice_areas' => 'مشق کے علاقے',
+    'our_attorneys' => 'ہمارے وکلاء',
+    'news' => 'خبریں',
+    'contact' => 'رابطہ کریں',
+    'client_portal' => 'کلائنٹ پورٹل',
+    'free_consultation' => 'مفت مشاورت',
+    'schedule_consultation' => 'مشاورت کا وقت طے کریں',
+    'hero_title' => 'انتھک وکالت۔<br>ثابت شدہ نتائج۔',
+    'hero_desc' => 'ہم آپ کی منفرد ضروریات کے مطابق غیر معمولی قانونی نمائندگی فراہم کرتے ہیں۔',
+    'recent_victories' => 'حالیہ فتوحات',
+    'subscribe_newsletter' => 'نیوز لیٹر کو سبسکرائب کریں',
+    'newsletter_desc' => 'قانونی بصیرت حاصل کریں۔',
+    'email_address' => 'ای میل ایڈریس',
+    'subscribe' => 'سبسکرائب',
+    'quick_links' => 'فوری لنکس',
+    'disclaimer' => 'دستبرداری',
+    'disclaimer_text' => 'اس ویب سائٹ پر معلومات صرف عام معلومات کے لیے ہیں۔',
+    'contact_info' => 'رابطہ کی معلومات',
+];
