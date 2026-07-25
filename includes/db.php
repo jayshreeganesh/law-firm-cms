@@ -58,4 +58,29 @@ function get_setting($pdo, $key) {
     $result = $stmt->fetch();
     return $result ? $result['setting_value'] : '';
 }
+
+function db_limit_offset_sql($driver, $sql, $limit, $offset = 0) {
+    $driver = strtolower($driver);
+    if ($driver === 'sqlsrv' || $driver === 'oci') {
+        return $sql . " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY";
+    } else {
+        return $sql . " LIMIT $limit OFFSET $offset";
+    }
+}
+
+function db_upsert_page_view($pdo, $driver, $date, $url) {
+    $driver = strtolower($driver);
+    try {
+        if ($driver === 'mysql' || $driver === 'mariadb') {
+            $stmt = $pdo->prepare("INSERT INTO page_views (view_date, page_url, views) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE views = views + 1");
+            $stmt->execute([$date, $url]);
+        } elseif ($driver === 'sqlite' || $driver === 'pgsql') {
+            $stmt = $pdo->prepare("INSERT INTO page_views (view_date, page_url, views) VALUES (?, ?, 1) ON CONFLICT(view_date, page_url) DO UPDATE SET views = page_views.views + 1");
+            $stmt->execute([$date, $url]);
+        } elseif ($driver === 'sqlsrv' || $driver === 'oci') {
+            $stmt = $pdo->prepare("MERGE INTO page_views target USING (SELECT ? as v_date, ? as v_url) source ON (target.view_date = source.v_date AND target.page_url = source.v_url) WHEN MATCHED THEN UPDATE SET views = views + 1 WHEN NOT MATCHED THEN INSERT (view_date, page_url, views) VALUES (source.v_date, source.v_url, 1);");
+            $stmt->execute([$date, $url]);
+        }
+    } catch (Exception $e) {}
+}
 ?>

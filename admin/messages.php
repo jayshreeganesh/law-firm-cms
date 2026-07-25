@@ -36,7 +36,7 @@ $offset = ($page - 1) * $limit;
 $total = $pdo->query("SELECT COUNT(*) FROM messages")->fetchColumn();
 $totalPages = ceil($total / $limit);
 
-$stmt = $pdo->prepare("SELECT * FROM messages ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
+$stmt = $pdo->prepare(db_limit_offset_sql($db_driver, "SELECT * FROM messages ORDER BY created_at DESC", $limit, $offset));
 $stmt->execute();
 $messages = $stmt->fetchAll();
 ?>

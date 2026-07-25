@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin_role']) || $_SESSION['admin_role'] !== 'superadmin')
     die("Unauthorized Access. Superadmin only.");
 }
 
-$stmt = $pdo->query("SELECT a.*, u.username, u.role FROM audit_logs a LEFT JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC LIMIT 500");
+$stmt = $pdo->query(db_limit_offset_sql($db_driver, "SELECT a.*, u.username, u.role FROM audit_logs a LEFT JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC", 500));
 $logs = $stmt->fetchAll();
 ?>
 

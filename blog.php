@@ -36,7 +36,7 @@ require_once 'includes/header.php';
             $total = $stmt->fetchColumn();
             $totalPages = ceil($total / $limit);
 
-            $stmt = $pdo->prepare("SELECT * FROM posts $whereClause ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
+            $stmt = $pdo->prepare(db_limit_offset_sql($db_driver, "SELECT * FROM posts $whereClause ORDER BY created_at DESC", $limit, $offset));
             $stmt->execute($params);
             $posts = $stmt->fetchAll();
             if(count($posts) > 0):

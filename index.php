@@ -10,7 +10,7 @@
 </section>
 
 <?php
-$stmt = $pdo->query("SELECT * FROM case_results ORDER BY created_at DESC LIMIT 3");
+$stmt = $pdo->query(db_limit_offset_sql($db_driver, "SELECT * FROM case_results ORDER BY created_at DESC", 3));
 $results = $stmt->fetchAll();
 if (count($results) > 0):
 ?>
@@ -38,7 +38,7 @@ if (count($results) > 0):
         <h2 class="section-title">Our Practice Areas</h2>
         <div class="grid-3">
             <?php
-            $stmt = $pdo->query("SELECT * FROM practice_areas ORDER BY id DESC LIMIT 3");
+            $stmt = $pdo->query(db_limit_offset_sql($db_driver, "SELECT * FROM practice_areas ORDER BY id DESC", 3));
             while ($row = $stmt->fetch()):
             ?>
             <div class="card">

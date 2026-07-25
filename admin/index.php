@@ -107,7 +107,7 @@ new Chart(ctx, {
             </thead>
             <tbody>
                 <?php
-                $recent = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC LIMIT 5");
+                $recent = $pdo->query(db_limit_offset_sql($db_driver, "SELECT * FROM messages ORDER BY created_at DESC", 5));
                 $recent_messages = $recent->fetchAll();
                 
                 if (count($recent_messages) > 0):

@@ -72,94 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // CREATE TABLES
-        $queries = [
-            "CREATE TABLE users (
-                id $auto_inc,
-                username VARCHAR(50) NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                two_factor_code VARCHAR(20),
-                created_at $timestamp
-            )",
-            "CREATE TABLE practice_areas (
-                id $auto_inc,
-                title VARCHAR(100) NOT NULL,
-                description TEXT,
-                icon VARCHAR(50) DEFAULT 'fas fa-balance-scale',
-                created_at $timestamp
-            )",
-            "CREATE TABLE attorneys (
-                id $auto_inc,
-                name VARCHAR(100) NOT NULL,
-                position VARCHAR(100),
-                bio TEXT,
-                image VARCHAR(255),
-                email VARCHAR(100),
-                phone VARCHAR(50),
-                created_at $timestamp
-            )",
-            "CREATE TABLE messages (
-                id $auto_inc,
-                name VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                phone VARCHAR(50),
-                subject VARCHAR(200),
-                message TEXT NOT NULL,
-                is_read $boolean DEFAULT 0,
-                created_at $timestamp
-            )",
-            "CREATE TABLE posts (
-                id $auto_inc,
-                title VARCHAR(255) NOT NULL,
-                content TEXT NOT NULL,
-                image VARCHAR(255),
-                created_at $timestamp,
-                updated_at $timestamp
-            )",
-            "CREATE TABLE settings (
-                setting_key VARCHAR(50) PRIMARY KEY,
-                setting_value TEXT
-            )",
-            "CREATE TABLE case_results (
-                id $auto_inc,
-                title VARCHAR(255) NOT NULL,
-                amount VARCHAR(50),
-                case_type VARCHAR(100),
-                description TEXT,
-                created_at $timestamp
-            )",
-            "CREATE TABLE clients (
-                id $auto_inc,
-                name VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL UNIQUE,
-                password VARCHAR(255) NOT NULL,
-                created_at $timestamp
-            )",
-            "CREATE TABLE newsletter_subscribers (
-                id $auto_inc,
-                email VARCHAR(100) NOT NULL UNIQUE,
-                subscribed_at $timestamp
-            )",
-            "CREATE TABLE page_views (
-                view_date DATE,
-                page_url VARCHAR(255),
-                views INT DEFAULT 0,
-                PRIMARY KEY (view_date, page_url)
-            )",
-            "CREATE TABLE custom_forms (
-                id $auto_inc,
-                title VARCHAR(255) NOT NULL,
-                fields_json TEXT,
-                created_at $timestamp
-            )",
-            "CREATE TABLE audit_logs (
-                id $auto_inc,
-                user_id INT,
-                action VARCHAR(255),
-                ip_address VARCHAR(45),
-                created_at $timestamp
-            )"
-        ];
+        
+        $schema_file = __DIR__ . "/database/schema/" . strtolower($db_driver) . ".sql";
+        if (file_exists($schema_file)) {
+            $sql = file_get_contents($schema_file);
+            $queries = array_filter(array_map("trim", explode(";", $sql)));
+        } else {
+            throw new Exception("Schema file not found for driver: " . $db_driver);
+        }
+
 
         // Drop existing tables if they exist to avoid conflict (basic implementation)
         $tables = ['newsletter_subscribers', 'clients', 'case_results', 'settings', 'posts', 'messages', 'attorneys', 'practice_areas', 'users'];

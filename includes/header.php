@@ -25,12 +25,13 @@ if (file_exists($lang_file)) {
 
 // Page View Analytics Tracking
 try {
-    $current_url = $_SERVER['REQUEST_URI'];
-    // Filter out query parameters for cleaner analytics if desired, or keep as is
+    $current_url = "http" . (isset($_SERVER['HTTPS']) ? "s" : "") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     $parsed_url = parse_url($current_url, PHP_URL_PATH);
     $today = date('Y-m-d');
-    $stmt = $pdo->prepare("INSERT INTO page_views (view_date, page_url, views) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE views = views + 1");
-    $stmt->execute([$today, $parsed_url]);
+    
+    if (isset($db_driver)) {
+        db_upsert_page_view($pdo, $db_driver, $today, $parsed_url);
+    }
 } catch (Exception $e) {
     // Silently ignore if DB isn't ready
 }

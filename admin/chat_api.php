@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     exit;
 }
 
-$stmt = $pdo->query("SELECT c.*, u.username, u.role, DATE_FORMAT(c.created_at, '%h:%i %p') as time FROM admin_chat c JOIN users u ON c.sender_id = u.id ORDER BY c.created_at ASC LIMIT 50");
+$stmt = $pdo->query(db_limit_offset_sql($db_driver, "SELECT c.*, u.username, u.role, DATE_FORMAT(c.created_at, '%h:%i %p') as time FROM admin_chat c JOIN users u ON c.sender_id = u.id ORDER BY c.created_at ASC", 50));
 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 header('Content-Type: application/json');
