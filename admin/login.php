@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/admin_header.php';
+require_once '../includes/db.php';
 
 $error = '';
 
@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->prepare("UPDATE users SET two_factor_code = ? WHERE id = ?")->execute([$code, $user['id']]);
         
         // Simulate sending email
-        require_once '../includes/db.php';
         $from_email = get_setting($pdo, 'smtp_from_email') ?: 'no-reply@lawfirm.local';
         @mail($user['email'] ?? 'admin@local', "Your 2FA Code", "Your login code is: $code", "From: $from_email");
         
@@ -27,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Invalid username or password.';
     }
 }
+
+require_once 'includes/admin_header.php';
 ?>
 
 <div class="login-page">

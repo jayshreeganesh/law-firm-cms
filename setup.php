@@ -75,9 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $queries = [
             "CREATE TABLE users (
                 id $auto_inc,
-                username VARCHAR(50) NOT NULL UNIQUE,
+                username VARCHAR(50) NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 email VARCHAR(100) NOT NULL,
+                two_factor_code VARCHAR(20),
                 created_at $timestamp
             )",
             "CREATE TABLE practice_areas (
@@ -138,6 +139,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 id $auto_inc,
                 email VARCHAR(100) NOT NULL UNIQUE,
                 subscribed_at $timestamp
+            )",
+            "CREATE TABLE page_views (
+                view_date DATE,
+                page_url VARCHAR(255),
+                views INT DEFAULT 0,
+                PRIMARY KEY (view_date, page_url)
+            )",
+            "CREATE TABLE custom_forms (
+                id $auto_inc,
+                title VARCHAR(255) NOT NULL,
+                fields_json TEXT,
+                created_at $timestamp
+            )",
+            "CREATE TABLE audit_logs (
+                id $auto_inc,
+                user_id INT,
+                action VARCHAR(255),
+                ip_address VARCHAR(45),
+                created_at $timestamp
             )"
         ];
 
@@ -183,7 +203,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         file_put_contents(__DIR__ . '/includes/config.php', $config_content);
 
-        $message = "<div style='color: green; font-weight: bold;'>Installation Successful! You can now visit the <a href='index.php'>Home Page</a>. (Default Admin login: admin / admin123)</div>";
+        $message = "
+            <div style='color: green; font-weight: bold; text-align: center; margin-bottom: 1rem;'>
+                Installation Successful! Redirecting to Admin Dashboard...
+            </div>
+            <div style='background: #f8fafc; padding: 1rem; border-radius: 4px; text-align: center; border: 1px solid #e2e8f0; margin-bottom: 1.5rem;'>
+                <p style='margin: 0 0 0.5rem 0; color: #64748b;'>Save these default credentials:</p>
+                <strong style='font-size: 1.2rem; color: #0f172a;'>Username: admin</strong><br>
+                <strong style='font-size: 1.2rem; color: #0f172a;'>Password: admin123</strong>
+            </div>
+            <a href='admin/login.php' class='btn' style='display: block; text-align: center; text-decoration: none;'>Go to Admin Login Now</a>
+            <meta http-equiv='refresh' content='4;url=admin/login.php'>
+        ";
 
     } catch (Exception $e) {
         $message = "<div style='color: red;'>Error: " . $e->getMessage() . "</div>";
