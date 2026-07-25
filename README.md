@@ -1,44 +1,85 @@
-# Law Firm CMS
+# Justice & Partners - Enterprise Law Firm CMS
 
-A modern, responsive, and robust Content Management System (CMS) tailored specifically for Law Firms, Attorneys, and Legal Practices. Built entirely in PHP, this CMS natively supports multiple database engines including MySQL, MariaDB, SQLite, PostgreSQL, MS SQL Server, and Oracle.
+An ultra-modern, fully responsive, and highly advanced Content Management System built specifically for Law Firms. This project was engineered from the ground up to feature enterprise-level architecture, encompassing agnostic database connectivity, hyper-local translations, strict web accessibility (WCAG) standards, and automated end-to-end testing frameworks.
 
-## 🚀 Features
+## 🌟 Core Enterprise Features
 
-- **Multi-Database Support:** Choose your preferred database during installation.
-- **Client Dashboard & Secure Login:** Clients can log in, view updates, and upload documents securely.
-- **Dynamic Content Management:** Easily manage blog posts, attorneys, practice areas, and case results.
-- **Modern UI/UX:** Responsive front-end built for trust and high conversions.
-- **Automated Installation Wizard:** Effortless setup in under 60 seconds with an optional dummy data generator.
+### 1. Database Agnostic Architecture
+Unlike standard PHP applications locked to MySQL, this CMS uses a completely abstracted PDO layer allowing it to seamlessly run on **6 different database engines** without modifying a single line of application code:
+- MySQL
+- MariaDB
+- PostgreSQL
+- SQLite
+- Microsoft SQL Server (SQLSRV)
+- Oracle (OCI)
 
-## 🛠 Installation
+**How it works:**
+- **DDL (Schema Creation):** The `setup.php` script dynamically selects the correct syntax file from the `database/schema/` directory (e.g., `mysql.sql`, `pgsql.sql`, `sqlsrv.sql`) based on your chosen driver.
+- **DML (Query Abstraction):** Syntax differences between drivers (like pagination offsets or `UPSERT` statements) are routed through helper functions in `includes/db.php`.
+*Example:* `db_limit_offset_sql('oracle', $sql, 10, 5)` automatically converts standard `LIMIT` queries into Oracle's `OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY`.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/law-firm-cms.git
-   cd law-firm-cms
-   ```
+### 2. Hyper-Localized Translation Engine (28 Languages)
+The CMS features a lightning-fast, offline native translation engine specifically curated for the Indian subcontinent, ensuring zero reliance on third-party APIs for primary regional traffic.
+- **22 Official Scheduled Languages:** Hindi, Bengali, Telugu, Marathi, Tamil, Urdu, Gujarati, Kannada, Odia, Malayalam, Punjabi, Assamese, etc.
+- **6 Massive Regional Dialects:** Bhojpuri, Haryanvi, Magahi, Marwari, Chhattisgarhi, and Awadhi.
+- **Global Fallback:** A fully integrated Google Translate widget remains available to instantly translate the site into any non-Indian global language (French, German, Spanish, etc.).
 
-2. **Start your web server:**
-   Ensure you have a local web server running (Apache, Nginx, or XAMPP) and PHP installed. Alternatively, you can use the built-in PHP server:
-   ```bash
-   php -S localhost:8000
-   ```
+**How to use:**
+Simply select a language from the "Native Offline Languages" dropdown in the header. The application will store your preference in a session and instantaneously load the corresponding array from the `lang/` directory (e.g., `lang/bho.php` for Bhojpuri).
 
-3. **Run the Setup Wizard:**
-   Open your browser and navigate to `http://localhost:8000`. You will be automatically redirected to the installation wizard.
-   - Select your preferred database.
-   - Enter your connection credentials (for MySQL/PostgreSQL/etc.).
-   - (Optional) Check the "Generate Dummy Data" box to populate the site with sample content.
-   - Click **Install Database**.
+### 3. Universal Accessibility (WCAG A11y Toolbar)
+Designed to be inclusive for specially-abled users, the CMS includes a floating Accessibility Widget (bottom left icon) offering enterprise-grade tools:
+- **Read Page Aloud (TTS):** Uses the browser's native Speech Synthesis API to read page content out loud for the visually impaired.
+- **High Contrast Mode:** Inverts the UI for users with color blindness, cataracts, or low vision.
+- **Dyslexia Friendly Font:** Overrides global fonts with heavier, asymmetric typography to prevent "jumping letters".
+- **Text Resizer:** Instantly scales the global UI font size up or down.
 
-4. **Login to Admin Panel:**
-   Once installed, navigate to `/admin`.
-   - **Username:** `admin`
-   - **Password:** `admin123`
+### 4. Automated Testing Suite (PHPUnit & Playwright)
+To ensure absolute reliability during deployment, the project ships with both backend unit tests and frontend E2E tests:
+- **PHPUnit:** Validates that the abstract database query builders (like `db_limit_offset_sql`) generate the perfect syntax for all 6 database drivers.
+  *Run it:* `.\vendor\bin\phpunit`
+- **Playwright:** Launches a headless Chromium browser, navigates the live frontend, and verifies that UI elements (like localized titles and admin login portals) render correctly.
+  *Run it:* `npm run test`
 
-## 🔒 Security Best Practices
-- **Change Default Passwords:** Immediately log into the admin panel and change the default admin password.
-- **Configuration Security:** The `includes/config.php` file is automatically added to `.gitignore` to prevent sensitive credentials from being exposed on GitHub.
+---
 
-## 📜 License
-This project is open-sourced software licensed under the MIT license.
+## 🚀 Installation & Setup
+
+### Prerequisites
+- PHP 8.0+
+- Composer (for PHPUnit)
+- Node.js & NPM (for Playwright)
+- A supported Database Server (MySQL, Postgres, SQL Server, etc.)
+
+### Step 1: Install Dependencies
+```bash
+# Install PHP testing dependencies
+composer install
+
+# Install Playwright testing dependencies
+npm install
+npx playwright install chromium
+```
+
+### Step 2: Database Setup
+1. Open `includes/db.php` and configure your database credentials.
+2. Change the `$db_driver` variable to match your database (e.g., `'mysql'`, `'pgsql'`, `'sqlsrv'`).
+3. Run the built-in setup script by navigating to: `http://localhost/setup.php`
+4. The setup script will automatically detect your driver, run the exact DDL schema required, and instantly seed the database with dummy data!
+
+### Step 3: Run the Application
+You can serve the application locally using PHP's built-in server:
+```bash
+php -S localhost:8000 -t .
+```
+Navigate to `http://localhost:8000` to view the frontend, and `http://localhost:8000/admin/login.php` to access the CMS portal.
+
+---
+
+## 📁 Directory Structure
+- `/admin` - Secure backend portal for managing blogs, settings, and forms.
+- `/assets` - CSS, JS, and Images (Features built-in Dark Mode).
+- `/database/schema` - Distinct SQL files tailored to 6 different database engines.
+- `/includes` - Core application logic, database abstraction (`db.php`), and the WCAG Accessibility widget (`accessibility.php`).
+- `/lang` - 28 native translation arrays.
+- `/tests` - Playwright E2E specs (`/tests/e2e`) and PHPUnit backend tests.
