@@ -99,7 +99,8 @@ var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
-s1.src='https://embed.tawk.to/64b5f8c9cc26a871b0290514/1h5jb2t8r'; // Example ID
+<?php $tawk_id = get_setting($pdo, 'tawk_property_id') ?: '64b5f8c9cc26a871b0290514/1h5jb2t8r'; ?>
+s1.src='https://embed.tawk.to/<?= htmlspecialchars($tawk_id) ?>';
 s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);

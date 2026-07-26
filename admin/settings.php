@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'smtp_from_email' => $_POST['smtp_from_email'] ?? 'no-reply@lawfirm.local',
         'smtp_from_email' => $_POST['smtp_from_email'] ?? 'no-reply@lawfirm.local',
         'chat_widget_type' => $_POST['chat_widget_type'] ?? 'tawk',
+        'tawk_property_id' => $_POST['tawk_property_id'] ?? '',
         'gemini_api_key' => $_POST['gemini_api_key'] ?? '',
         'google_calendar_webhook' => $_POST['google_calendar_webhook'] ?? '',
         'twilio_sid' => $_POST['twilio_sid'] ?? '',
@@ -120,7 +121,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
+        <div style="margin-bottom: 1rem;" id="tawk_settings_div">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Tawk.to Property ID</label>
+            <input type="text" name="tawk_property_id" value="<?= htmlspecialchars(get_setting($pdo, 'tawk_property_id')) ?>" placeholder="e.g. 64b5f8c9cc26a871b0290514/1h5jb2t8r" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
+            <small style="color: #64748b; display: block; margin-top: 0.25rem;">Found in your Tawk.to Dashboard &gt; Administration &gt; Property Settings.</small>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;" id="ai_settings_div">
             <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Google Gemini API Key (If using AI Chatbot)</label>
             <input type="password" name="gemini_api_key" value="<?= htmlspecialchars(get_setting($pdo, 'gemini_api_key')) ?>" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
             <small style="color: #64748b; display: block; margin-top: 0.25rem;">Leave blank to use the deterministic offline fallback bot.</small>
@@ -278,5 +285,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" style="padding: 0.75rem 1.5rem; background-color: var(--admin-accent); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">Save Settings</button>
     </form>
 </div>
+
+<script>
+document.querySelector('select[name="chat_widget_type"]').addEventListener('change', function() {
+    const type = this.value;
+    document.getElementById('tawk_settings_div').style.display = (type === 'tawk') ? 'block' : 'none';
+    document.getElementById('ai_settings_div').style.display = (type === 'ai') ? 'block' : 'none';
+});
+// Trigger on load
+document.querySelector('select[name="chat_widget_type"]').dispatchEvent(new Event('change'));
+</script>
 
 <?php require_once 'includes/admin_footer.php'; ?>
