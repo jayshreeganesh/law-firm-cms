@@ -23,3 +23,9 @@ vendor/
 .env
 coverage/
 
+# Setup Wizard Backups
+includes/config_backup_*.php
+database_backup_*.sqlite
+
+# Automated Test Output
+screenshots/
