@@ -12,3 +12,10 @@ Thumbs.db
 # Logs
 error_log
 *.log
+
+.phpunit.result.cache
+node_modules/
+playwright-report/
+test-results/
+vendor/
+
