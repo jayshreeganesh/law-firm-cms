@@ -17,7 +17,7 @@
             ?>
             <div class="card" style="padding: 0; overflow: hidden;">
                 <?php $img_src = str_starts_with($row['image'], 'http') ? $row['image'] : ($row['image'] ? $row['image'] : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80'); ?>
-                <img src="<?= htmlspecialchars($img_src) ?>" alt="<?= htmlspecialchars($row['name']) ?>" style="width: 100%; height: 250px; object-fit: cover;">
+                <img src="<?= htmlspecialchars($img_src) ?>" alt="<?= htmlspecialchars($row['name']) ?>" style="width: 100%; height: 350px; object-fit: cover; object-position: top center;">
                 <div style="padding: 1.5rem;">
                     <h3><?= htmlspecialchars($row['name']) ?></h3>
                     <p style="color: var(--secondary-color); font-weight: 600; margin-bottom: 1rem;"><?= htmlspecialchars($row['position']) ?></p>
