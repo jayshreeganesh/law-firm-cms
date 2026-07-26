@@ -30,6 +30,10 @@ body.dark-mode table td {
     border-bottom-color: #334155 !important;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--admin-bg);
     margin: 0;
