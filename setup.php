@@ -3,7 +3,21 @@ session_start();
 
 $message = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$config_file = __DIR__ . '/includes/config.php';
+$sqlite_path = __DIR__ . '/database.sqlite';
+$already_setup = file_exists($config_file);
+
+if (isset($_POST['reset_setup']) && $already_setup) {
+    $ts = date('Ymd_His');
+    rename($config_file, __DIR__ . '/includes/config.backup_' . $ts . '.php');
+    if (file_exists($sqlite_path)) {
+        rename($sqlite_path, __DIR__ . '/database.backup_' . $ts . '.sqlite');
+    }
+    header("Location: setup.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$already_setup) {
     $db_driver = $_POST['db_driver'];
     $db_host   = $_POST['db_host'];
     $db_name   = $_POST['db_name'];
@@ -168,45 +182,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <?= $message ?>
         
-        <form method="POST" action="setup.php">
-            <div class="form-group">
-                <label>Database Type</label>
-                <select name="db_driver" id="db_driver" onchange="toggleFields()">
-                    <option value="mysql">MySQL</option>
-                    <option value="mariadb">MariaDB</option>
-                    <option value="sqlite">SQLite</option>
-                    <option value="pgsql">PostgreSQL</option>
-                    <option value="sqlsrv">MS SQL Server</option>
-                    <option value="oci">Oracle</option>
-                </select>
+        <?php if ($already_setup): ?>
+            <div style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+                <strong>Warning:</strong> The application is already set up and configured.
             </div>
-            
-            <div id="connection_fields">
+            <p>If you need to start over, you can reset the setup. This will backup your current <code>config.php</code> and database (if using SQLite) so you don't lose your previous configuration.</p>
+            <form method="POST" action="setup.php">
+                <input type="hidden" name="reset_setup" value="1">
+                <button type="submit" class="btn" style="background: #ef4444;" onclick="return confirm('Are you sure you want to backup your config and reset the installation?');">Backup & Reset Setup</button>
+            </form>
+        <?php else: ?>
+            <form method="POST" action="setup.php">
                 <div class="form-group">
-                    <label>Database Host</label>
-                    <input type="text" name="db_host" value="localhost">
+                    <label>Database Type</label>
+                    <select name="db_driver" id="db_driver" onchange="toggleFields()">
+                        <option value="mysql">MySQL</option>
+                        <option value="mariadb">MariaDB</option>
+                        <option value="sqlite">SQLite</option>
+                        <option value="pgsql">PostgreSQL</option>
+                        <option value="sqlsrv">MS SQL Server</option>
+                        <option value="oci">Oracle</option>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label>Database Name</label>
-                    <input type="text" name="db_name" value="lawyer_cms">
+                
+                <div id="connection_fields">
+                    <div class="form-group">
+                        <label>Database Host</label>
+                        <input type="text" name="db_host" value="localhost">
+                    </div>
+                    <div class="form-group">
+                        <label>Database Name</label>
+                        <input type="text" name="db_name" value="lawyer_cms">
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="db_user" value="root">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="db_pass">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="db_user" value="root">
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" name="dummy_data" id="dummy_data" checked>
+                    <label for="dummy_data" style="margin-bottom:0; font-weight: normal;">Generate Dummy Content (Faker)</label>
                 </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="db_pass">
-                </div>
-            </div>
-            
-            <div class="form-group checkbox-group">
-                <input type="checkbox" name="dummy_data" id="dummy_data" checked>
-                <label for="dummy_data" style="margin-bottom:0; font-weight: normal;">Generate Dummy Content (Faker)</label>
-            </div>
-            
-            <button type="submit" class="btn">Install Database</button>
-        </form>
+                
+                <button type="submit" class="btn">Install Database</button>
+            </form>
+        <?php endif; ?>
     </div>
 
     <script>
